@@ -1,7 +1,3 @@
-/* ==========================================================================
-   MINI ERP + CRM - USERS MODULE (users.js)
-   User Management, Role Assignments (ADMIN, SALES, WAREHOUSE, ACCOUNTS), CRUD
-   ========================================================================== */
 
 let currentPage = 1;
 const limit = 10;
