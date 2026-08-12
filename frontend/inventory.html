@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory - Mini ERP + CRM</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <style>
+    .segmented-tabs {
+      display: inline-flex;
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+      padding: 0.25rem;
+      border-radius: var(--radius-btn);
+      margin-bottom: 1.25rem;
+    }
+    .segmented-tab {
+      padding: 0.45rem 0.9rem;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--secondary-text);
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all var(--transition-fast);
+    }
+    .segmented-tab.active {
+      background-color: #FFFFFF;
+      color: var(--primary-text);
+      font-weight: 600;
+      box-shadow: var(--shadow-card);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-brand">
+          <div class="sidebar-brand-icon">E</div>
+          <div class="sidebar-brand-text">Mini<span>ERP</span></div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Main Navigation</div>
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="dashboard.html" class="nav-link">
+              <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="customers.html" class="nav-link">
+              <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span>Customers</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="products.html" class="nav-link">
+              <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              <span>Products</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="inventory.html" class="nav-link active">
+              <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              <span>Inventory</span>
+            </a>
+          </li>
+          <li class="nav-item admin-only">
+            <a href="users.html" class="nav-link">
+              <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>Users</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-profile-widget">
+          <div class="user-avatar" id="user-avatar-text">U</div>
+          <div class="user-details">
+            <div class="user-name" id="user-display-name">Loading...</div>
+            <span class="user-role-badge" id="user-display-role">ROLE</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+      <header class="top-navbar">
+        <div class="navbar-left">
+          <button class="sidebar-toggle-btn" id="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+          <h1 class="page-title-heading">Inventory</h1>
+        </div>
+        <div class="navbar-right">
+          <button class="btn-logout" onclick="logout()">Logout</button>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <!-- Page Header Action -->
+        <div class="page-header-action">
+          <div class="page-header-title">
+            <h2>Inventory Overview</h2>
+            <p>Perform Stock In / Stock Out adjustments and view stock movement logs.</p>
+          </div>
+          <div style="display:flex; gap:0.5rem;">
+            <button class="btn btn-outline" onclick="openAdjustModal('', 'IN')">
+              Stock In
+            </button>
+            <button class="btn btn-outline" onclick="openAdjustModal('', 'OUT')">
+              Stock Out
+            </button>
+          </div>
+        </div>
+
+        <!-- Inventory Metrics Grid -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-icon-bg">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            </div>
+            <div class="metric-info">
+              <h3>Total Products</h3>
+              <div class="metric-number" id="inv-metric-products">0</div>
+              <div class="metric-subtitle">Catalog items</div>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon-bg">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="metric-info">
+              <h3>In Stock</h3>
+              <div class="metric-number" id="inv-metric-instock">0</div>
+              <div class="metric-subtitle">Optimal stock levels</div>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon-bg">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+            </div>
+            <div class="metric-info">
+              <h3>Low Stock</h3>
+              <div class="metric-number" id="inv-metric-lowstock">0</div>
+              <div class="metric-subtitle">Reorder alerts</div>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon-bg">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            </div>
+            <div class="metric-info">
+              <h3>Stock Value</h3>
+              <div class="metric-number" id="inv-metric-value">Active</div>
+              <div class="metric-subtitle">Inventory health</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Segmented Tabs -->
+        <div class="segmented-tabs">
+          <div class="segmented-tab active" id="tab-overview" onclick="switchTab('overview')">Current Stock Overview</div>
+          <div class="segmented-tab" id="tab-movements" onclick="switchTab('movements')">Movement Audit Log</div>
+        </div>
+
+        <!-- Overview Section -->
+        <div id="overview-section">
+          <div class="card">
+            <div class="card-body" style="padding: 0;">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Product Name</th>
+                      <th>SKU</th>
+                      <th>Current Stock</th>
+                      <th>Reorder Level</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="inventory-overview-tbody">
+                    <tr>
+                      <td colspan="6" style="text-align:center; padding:1.5rem;">
+                        Loading stock overview...
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Movements Section -->
+        <div id="movements-section" style="display: none;">
+          <div class="card">
+            <div class="card-body" style="padding: 0;">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Product / SKU</th>
+                      <th>Movement Type</th>
+                      <th>Quantity</th>
+                      <th>Stock Before/After</th>
+                      <th>Reason / Reference</th>
+                      <th>Date & Time</th>
+                    </tr>
+                  </thead>
+                  <tbody id="movements-tbody">
+                    <tr>
+                      <td colspan="6" style="text-align:center; padding:1.5rem;">
+                        Loading stock movement logs...
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div id="movements-pagination" class="pagination-wrapper"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Stock Adjustment Modal -->
+  <div class="modal-backdrop" id="adjust-modal-backdrop">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title" id="adjust-modal-title">Adjust Stock</h3>
+        <button class="modal-close-btn" onclick="closeAdjustModal()">&times;</button>
+      </div>
+      <form id="adjust-form" onsubmit="handleStockAdjustSubmit(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label required" for="adjust-product-id">Select Product</label>
+            <select id="adjust-product-id" class="form-select" required>
+              <option value="">Loading products list...</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required" for="adjust-type">Movement Type</label>
+              <select id="adjust-type" class="form-select" required>
+                <option value="IN">Stock IN (Receive Stock)</option>
+                <option value="OUT">Stock OUT (Issue Stock)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label required" for="adjust-quantity">Quantity</label>
+              <input type="number" min="1" id="adjust-quantity" class="form-control" required placeholder="1">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label required" for="adjust-notes">Reason / Notes</label>
+            <input type="text" id="adjust-notes" class="form-control" required placeholder="e.g. Shipment arrival, Damaged inventory, Manual correction">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeAdjustModal()">Cancel</button>
+          <button type="submit" id="btn-submit-adjust" class="btn btn-primary">Submit Adjustment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/inventory.js"></script>
+  <script>
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

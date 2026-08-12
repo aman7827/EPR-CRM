@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Mini ERP + CRM</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      background-color: var(--bg-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 1.5rem;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .login-card {
+      background-color: var(--surface-color);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-modal);
+      padding: 2.25rem;
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 1.75rem;
+    }
+
+    .login-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background-color: var(--sidebar-bg);
+      color: #FFFFFF;
+      border-radius: 8px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+
+    .login-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary-text);
+    }
+
+    .login-subtitle {
+      font-size: 13px;
+      color: var(--secondary-text);
+      margin-top: 0.25rem;
+    }
+
+    .demo-users-section {
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .demo-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--secondary-text);
+      margin-bottom: 0.65rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .demo-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      justify-content: center;
+    }
+
+    .demo-chip {
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+      color: var(--primary-text);
+      padding: 0.3rem 0.65rem;
+      border-radius: var(--radius-btn);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .demo-chip:hover {
+      background-color: var(--sidebar-bg);
+      color: #FFFFFF;
+      border-color: var(--sidebar-bg);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="login-logo">E</div>
+        <h1 class="login-title">Mini ERP + CRM</h1>
+        <p class="login-subtitle">Sign in to access your business portal</p>
+      </div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label class="form-label required" for="email">Email Address</label>
+          <input type="email" id="email" class="form-control" placeholder="admin@crm.com" required autofocus>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label required" for="password">Password</label>
+          <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+        </div>
+
+        <button type="submit" id="btn-login-submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 0.5rem;">
+          Sign In
+        </button>
+      </form>
+
+      <div class="demo-users-section">
+        <div class="demo-title">Quick Demo Accounts</div>
+        <div class="demo-chips">
+          <button type="button" class="demo-chip" onclick="fillDemo('admin@crm.com')">Admin</button>
+          <button type="button" class="demo-chip" onclick="fillDemo('sales@crm.com')">Sales</button>
+          <button type="button" class="demo-chip" onclick="fillDemo('warehouse@crm.com')">Warehouse</button>
+          <button type="button" class="demo-chip" onclick="fillDemo('accounts@crm.com')">Accounts</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    function fillDemo(email) {
+      document.getElementById('email').value = email;
+      document.getElementById('password').value = 'Password123!';
+      document.getElementById('btn-login-submit').click();
+    }
+
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const btn = document.getElementById('btn-login-submit');
+
+      btn.disabled = true;
+      btn.textContent = 'Signing in...';
+
+      try {
+        await login(email, password);
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = 'Sign In';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{
+  "name": "mini-erp-crm-backend",
+  "version": "1.0.0",
+  "description": "Production-grade Mini ERP + CRM Operations Portal backend using Node.js, Express, PostgreSQL raw SQL, Zod, Pino, and Jest",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "migrate": "node database/runMigrations.js",
+    "migrate:status": "node database/migrationStatus.js",
+    "migrate:reset": "node database/resetDatabase.js",
+    "seed": "node database/seed.js",
+    "db:migrate": "node database/runMigrations.js",
+    "db:seed": "node database/seed.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand --detectOpenHandles --forceExit",
+    "build": "node --check src/server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.13.3",
+    "pino": "^9.6.0",
+    "pino-http": "^10.4.0",
+    "uuid": "^11.1.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "pg-mem": "^3.0.14",
+    "pino-pretty": "^13.0.0",
+    "supertest": "^7.0.0"
+  }
+}
