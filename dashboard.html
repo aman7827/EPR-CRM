@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dashboard - Mini ERM + CRM</title>
+        <link rel = "Stylesheet" href = "css/style.css">
+        <link rel = "stylesheet" href="css/dashboard.css">
+    </head>
+    <body>
+
+        <div class="app.layout">
+            <aside class = "sidebar" id = "sidebar">
+                <div class="sidebar-header">
+                    <div class="sidebar-brand">
+                        <div class="sidebar-brand-icon"><E</div>
+                        <div class="sidebar-brand-text">Mini<span>ERP</span></div>
+                    </div>
+                </div>
+                <nav class ="sidebar-nav">
+                    <div class="nav-section-title">Main Navigation</div>
+                    <ul class="nav-menu">
+                        <li class="nav-item">
+                            <a href="dashboard.html" class="nav-link active">
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="customers.html"class="nav-link">
+                                Customers
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="products.html" class="nav-link">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="inventory.html" class="nav-link">Inventory</a>
+                        </li>
+                        <li class="nav-item admin-only">
+                            <a href="user.html" class="nav-link">Users</a>
+                        </li>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="sidebar-footer">
+                    <div class="user-profile-widget">
+                        <div class="user-avatar" id="user-avatar-text">U</div>
+                        <div class="user-details">
+                            <div class="user-name" id="user-display0role">
+                                loding--
+                            </div>
+                            <span class="user-role-badge" id="user-display-role">ROLE</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <!--Main Applicatin area-->
+            <div class="main-wrapper">
+                <header class="top-navbar">
+                    <div class="navbar-left">
+                        <button class="sidebar-toggle-btn" id="sidebar-toggle" onclick="toggleSidebar()">
+                            -
+                            -
+                            -
+                        </button>
+                        <h1 class="page-title-heading">Dashboard</h1>
+                    </div>
+                    <div class="navbar-right">
+                        <button class="btn-logout" onclick="logout()">
+                            Logout
+                        </button>
+                    </div>
+                </header>
+                <!--main application content-->
+                <main class="main-content">
+                    
+                </main>
+            </div>
+        </div>
+    </body>
+</html>
