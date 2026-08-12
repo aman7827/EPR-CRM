@@ -166,6 +166,60 @@ h3, .card-title {
     color: var(--sidebar-active-text);
     font-weight: 600;
 }
+.top-navabar {
+    height: var(--navbar-height0);
+    background-color: var(--surface-color);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 90;
+}
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.sidebar-toggle-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    font-size: 1.1rem;
+    color: var(--secondary-text);
+    cursor: pointer;
+    padding: 0.4rem 0.6rem;
+    border-radius: var(--radius-btn);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+.page-title-heading {
+    font-size: 18px;
+    font-weight: 700;
+    columns: var(--primary-text);
+}
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.btn-logout {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.85rem;
+    background-color: var(--surface-color);
+    color: var(--secondary-text);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-btn);
+    font-weight: 500;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
 main-content {
     flex: 1;
     padding: 1.5rem;
