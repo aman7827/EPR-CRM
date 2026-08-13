@@ -3,7 +3,8 @@
    Handles all HTTP communications with backend running at http://localhost:5000/api/v1
    ========================================================================== */
 
-   const API_BASE_URL = "https://erm-crm-backend.onrender.com/api/v1";
+  const API_BASE_URL = "https://erm-crm-backend.onrender.com/api/v1";
+
 function safeRedirect(target) {
   const currentPage = (window.location.pathname || '/').split('/').pop() || 'index.html';
   if (currentPage === target) {
